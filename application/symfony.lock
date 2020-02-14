@@ -90,6 +90,9 @@
     "egulias/email-validator": {
         "version": "2.1.15"
     },
+    "hashids/hashids": {
+        "version": "4.0.0"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },

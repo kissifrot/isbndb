@@ -17,9 +17,10 @@ class Book
     private $id;
 
     /**
+     * ISBN 13
      * @ORM\Column(type="string", length=13)
      */
-    private $isbn;
+    private $ean;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
@@ -56,19 +57,34 @@ class Book
      */
     private $authors;
 
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $publisher;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $format;
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $collection;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIsbn(): ?string
+    public function getEan(): ?string
     {
-        return $this->isbn;
+        return $this->ean;
     }
 
-    public function setIsbn(string $isbn): self
+    public function setEan(string $ean): self
     {
-        $this->isbn = $isbn;
+        $this->ean = $ean;
 
         return $this;
     }
@@ -153,6 +169,42 @@ class Book
     public function setAuthors(string $authors): self
     {
         $this->authors = $authors;
+
+        return $this;
+    }
+
+    public function getPublisher(): ?string
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(?string $publisher): self
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getCollection(): ?string
+    {
+        return $this->collection;
+    }
+
+    public function setCollection(?string $collection): self
+    {
+        $this->collection = $collection;
 
         return $this;
     }
