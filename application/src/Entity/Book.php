@@ -11,19 +11,12 @@ class Book
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * ISBN 13
-     * @ORM\Column(type="string", length=13)
+     * @ORM\Column(type="bigint", length=13, options={"unsigned": true})
      */
     private $ean;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="bigint", length=10, options={"unsigned": true}, nullable=true)
      */
     private $isbn10;
 
@@ -72,33 +65,35 @@ class Book
      */
     private $collection;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="books")
+     */
+    private $addedBy;
 
-    public function getEan(): ?string
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Language", inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $language;
+
+    public function getEan(): ?int
     {
         return $this->ean;
     }
 
-    public function setEan(string $ean): self
+    public function setEan(int $ean): void
     {
         $this->ean = $ean;
-
-        return $this;
     }
 
-    public function getIsbn10(): ?string
+    public function getIsbn10(): ?int
     {
         return $this->isbn10;
     }
 
-    public function setIsbn10(?string $isbn10): self
+    public function setIsbn10(?int $isbn10): void
     {
         $this->isbn10 = $isbn10;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -106,11 +101,9 @@ class Book
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     public function getSubTitle(): ?string
@@ -118,11 +111,9 @@ class Book
         return $this->subTitle;
     }
 
-    public function setSubTitle(?string $subTitle): self
+    public function setSubTitle(?string $subTitle): void
     {
         $this->subTitle = $subTitle;
-
-        return $this;
     }
 
     public function getPublicationDate(): ?\DateTimeImmutable
@@ -130,11 +121,9 @@ class Book
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(?\DateTimeImmutable $publicationDate): self
+    public function setPublicationDate(?\DateTimeImmutable $publicationDate): void
     {
         $this->publicationDate = $publicationDate;
-
-        return $this;
     }
 
     public function getSummary(): ?string
@@ -142,11 +131,9 @@ class Book
         return $this->summary;
     }
 
-    public function setSummary(?string $summary): self
+    public function setSummary(?string $summary): void
     {
         $this->summary = $summary;
-
-        return $this;
     }
 
     public function getPagesCount(): ?int
@@ -154,11 +141,9 @@ class Book
         return $this->pagesCount;
     }
 
-    public function setPagesCount(?int $pagesCount): self
+    public function setPagesCount(?int $pagesCount): void
     {
         $this->pagesCount = $pagesCount;
-
-        return $this;
     }
 
     public function getAuthors(): ?string
@@ -166,11 +151,9 @@ class Book
         return $this->authors;
     }
 
-    public function setAuthors(string $authors): self
+    public function setAuthors(string $authors): void
     {
         $this->authors = $authors;
-
-        return $this;
     }
 
     public function getPublisher(): ?string
@@ -178,11 +161,9 @@ class Book
         return $this->publisher;
     }
 
-    public function setPublisher(?string $publisher): self
+    public function setPublisher(?string $publisher): void
     {
         $this->publisher = $publisher;
-
-        return $this;
     }
 
     public function getFormat(): ?string
@@ -190,11 +171,9 @@ class Book
         return $this->format;
     }
 
-    public function setFormat(string $format): self
+    public function setFormat(string $format): void
     {
         $this->format = $format;
-
-        return $this;
     }
 
     public function getCollection(): ?string
@@ -202,9 +181,29 @@ class Book
         return $this->collection;
     }
 
-    public function setCollection(?string $collection): self
+    public function setCollection(string $collection): void
     {
         $this->collection = $collection;
+    }
+
+    public function getAddedBy(): ?User
+    {
+        return $this->addedBy;
+    }
+
+    public function setAddedBy(User $addedBy): void
+    {
+        $this->addedBy = $addedBy;
+    }
+
+    public function getLanguage(): ?Language
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?Language $language): self
+    {
+        $this->language = $language;
 
         return $this;
     }

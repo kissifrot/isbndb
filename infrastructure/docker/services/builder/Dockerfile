@@ -11,10 +11,10 @@ RUN apk add --no-cache \
     npm \
     php7-phar \
     py2-pip \
-    python \
-    yarn
+    python
 
 RUN pip install pycodestyle
+RUN npm install -g yarn@latest
 
 COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 
